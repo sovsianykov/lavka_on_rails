@@ -1,0 +1,18 @@
+# config/database.yml
+
+default: &default
+  adapter: postgresql
+  encoding: 'UTF8'
+  username: applestock
+  password: fender1979
+  database: lavka
+  host: localhost # Change this if your PostgreSQL server is on a different host
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
