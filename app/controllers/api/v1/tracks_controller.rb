@@ -3,8 +3,12 @@ class Api::V1::TracksController < ApplicationController
   skip_before_action :verify_authenticity_token
   
   def index
-    @tracks = Track.all
-    render json: @tracks
+    if params[:popular].present?
+      @tracks = Track.most_popular(limit_param)
+    else
+      @tracks = Track.all
+    end
+    render json: @tracks, status: 200
   end
 
   def show
@@ -34,10 +38,19 @@ class Api::V1::TracksController < ApplicationController
     head :no_content
   end
 
+  def popular
+    @popular_tracks = Track.most_popular
+    render json: @popular_tracks
+  end
+
   private
 
   def track_params
     params.require(:track).permit(:title, :price, :album_id)
+  end
+  
+  def limit_param
+    params[:limit].to_i
   end
 
   def find_track
