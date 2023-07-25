@@ -4,7 +4,11 @@ Rails.application.routes.draw do
       resources :albums do
         resources :tracks, only: [:show]
       end
-      resources :tracks 
+      resources :tracks, only: :index do
+        collection do
+          get :popular
+        end
+      end
     end
   end
 end

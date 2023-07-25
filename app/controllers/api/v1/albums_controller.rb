@@ -3,8 +3,8 @@ class Api::V1::AlbumsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @albums = Album.all
-    render json: @albums
+    @albums = Album.with_tracks
+    render json: @albums.to_json(include: :tracks)
   end
 
   def show
