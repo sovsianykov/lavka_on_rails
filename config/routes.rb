@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :albums do
         resources :tracks, only: [:show]
       end
+      resources :tracks 
     end
   end
 end
