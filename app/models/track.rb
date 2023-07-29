@@ -1,5 +1,6 @@
 class Track < ApplicationRecord
   belongs_to :album
+  has_one :track_quantity
   
   def self.average_price
     format('%.2f',average(:price))

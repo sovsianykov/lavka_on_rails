@@ -40,6 +40,11 @@ class Api::V1::TracksController < ApplicationController
     render json: @info, status: 200
   end
 
+  def show_quantity
+    @tracks = ShowTracks.track_titles_with_quantities
+    render json: @tracks
+  end
+
   private
 
   def track_params
