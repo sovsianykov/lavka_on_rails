@@ -9,6 +9,7 @@ Rails.application.routes.draw do
           get :popular
           get :unpopular
           get :info
+          get :show_quantity 
         end
       end
     end

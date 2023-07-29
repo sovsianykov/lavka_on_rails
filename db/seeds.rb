@@ -9,19 +9,19 @@ require 'faker'
 # end
 
 # Seed Tracks and Albums with Categories
-100.times do
-  time_value = format('%.2f', rand(0.0..10.0))
-  rate_value = format('%.2f', rand(0.0..5.0))
+# 100.times do
+#   time_value = format('%.2f', rand(0.0..10.0))
+#   rate_value = format('%.2f', rand(0.0..5.0))
 
-  Track.create(
-    title: Faker::Music::Phish.song,
-    price: Faker::Commerce.price(range: 5.0..20.0),
-    album_id: rand(108..160),
-    time: time_value,
-    rate: rate_value,
-    download_times: rand(0..10000),
-  )
-end
+#   Track.create(
+#     title: Faker::Music::Phish.song,
+#     price: Faker::Commerce.price(range: 5.0..20.0),
+#     album_id: rand(108..160),
+#     time: time_value,
+#     rate: rate_value,
+#     download_times: rand(0..10000),
+#   )
+# end
 
 # 30.times do
 #   # Select a random category for the album
@@ -33,3 +33,15 @@ end
 #     category: category   # Associate album with a category
 #   )
 # end
+
+def random_quantity
+  rand(1..100) # You can adjust the range as per your requirements
+end
+
+# Seed TrackQuantities
+Track.find_each do |track|
+  TrackQuantity.create!(
+    track: track,
+    quantity: random_quantity
+  )
+end
