@@ -1,7 +1,7 @@
 class Album < ApplicationRecord
   has_many :tracks
+  has_one :statistics
 
-  def self.with_tracks
-    includes(:tracks)
-  end
+  
+  scope :with_tracks, -> { includes(:tracks)  }
 end

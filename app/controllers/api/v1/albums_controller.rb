@@ -8,6 +8,7 @@ class Api::V1::AlbumsController < ApplicationController
   end
 
   def show
+    Statistic.add_to_statistics(@album[:id])
     render json: @album
   end
 
