@@ -34,14 +34,30 @@ require 'faker'
 #   )
 # end
 
-def random_quantity
-  rand(1..100) # You can adjust the range as per your requirements
-end
+# def random_quantity
+#   rand(1..100) # You can adjust the range as per your requirements
+# end
 
-# Seed TrackQuantities
-Track.find_each do |track|
-  TrackQuantity.create!(
-    track: track,
-    quantity: random_quantity
-  )
-end
+# # Seed TrackQuantities
+# Track.find_each do |track|
+#   TrackQuantity.create!(
+#     track: track,
+#     quantity: random_quantity
+#   )
+# end
+# 30.times do
+#   Artist.create!(
+#     artist_name: Faker::Music.band
+#   )
+# end
+
+# bands = Band.all
+
+# bands.each do |band|
+#   id = band[:id]
+#   i = 1+ rand(20..48) 
+#   5.times do 
+#     BandArtist.create!(band_id: id, artist_id: i)
+#     i += 1
+#   end
+# end

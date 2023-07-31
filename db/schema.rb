@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_30_063625) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_31_085033) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_063625) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category"
+    t.bigint "band_id"
+    t.index ["band_id"], name: "index_albums_on_band_id"
+  end
+
+  create_table "artists", force: :cascade do |t|
+    t.string "artist_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "band_artists", force: :cascade do |t|
+    t.bigint "band_id"
+    t.bigint "artist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_band_artists_on_artist_id"
+    t.index ["band_id", "artist_id"], name: "index_band_artists_on_band_id_and_artist_id", unique: true
+    t.index ["band_id"], name: "index_band_artists_on_band_id"
+  end
+
+  create_table "bands", force: :cascade do |t|
+    t.string "band_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -55,6 +79,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_063625) do
     t.integer "download_times", default: 0
   end
 
+  add_foreign_key "albums", "bands"
+  add_foreign_key "band_artists", "artists"
+  add_foreign_key "band_artists", "bands"
   add_foreign_key "statistics", "albums"
   add_foreign_key "track_quantities", "tracks"
 end
