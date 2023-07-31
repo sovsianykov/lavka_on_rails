@@ -9,6 +9,8 @@ class Api::V1::AlbumsController < ApplicationController
 
   def show
     Statistic.add_to_statistics(@album[:id])
+    @album_with_artist = BandArtist(@album[:band_id])
+    
     render json: @album
   end
 
