@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bands
   namespace :api do
     namespace :v1 do
       resources :albums do
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
           get :show_quantity 
         end
       end
+      resources :bands
     end
   end
 end
